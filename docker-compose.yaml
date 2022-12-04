@@ -1,0 +1,39 @@
+version: '3.9'
+
+networks:
+  api:
+    driver: bridge
+
+services:
+  go-api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_USER=CHANGE_THIS
+      - DB_PASS=CHANGE_THIS
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_NAME=books_db
+    depends_on:
+      - mysql
+    networks:
+      - api
+    restart: on-failure
+  mysql:
+    image: "mariadb"
+    environment:
+      - MYSQL_ROOT_PASSWORD=CHANGE_THIS
+      - MYSQL_DATABASE=books_db
+      - MYSQL_USER=CHANGE_THIS
+      - MYSQL_PASSWORD=CHANGE_THIS
+    restart: always
+    ports:
+      - "3306:3306"
+    networks:
+      - api
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  db-data:
