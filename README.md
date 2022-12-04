@@ -1,6 +1,8 @@
 
 # GO Books REST API
 
+[![Go Report](https://goreportcard.com/badge/github.com/gareisdev/go-books-restapi)](https://goreportcard.com/report/github.com/gareisdev/go-books-restapi)
+
 This is a little REST API built with GO and uses MariaDB to store data.
 
 Packages:
